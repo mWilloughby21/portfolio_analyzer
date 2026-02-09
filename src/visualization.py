@@ -30,21 +30,3 @@ class Visualization:
         plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
         plt.title('Portfolio Allocation')
         plt.show()
-
-if __name__ == "__main__":
-    from portfolio import Portfolio
-    from market_data import MarketData
-    from analytics import Analytics
-    from pathlib import Path
-    
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    CSV_PATH = BASE_DIR / 'data' / 'portfolio.csv'
-    
-    portfolio = Portfolio.from_csv(CSV_PATH)
-    prices = MarketData.get_prices(portfolio.positions)
-    
-    position_values = {p.ticker: Analytics.position_value(p, prices[p.ticker]) for p in portfolio.positions}
-    allocation = Analytics.allocation(portfolio.positions, prices)
-    
-    Visualization.plot_portfolio_value(position_values)
-    Visualization.plot_allocation(allocation)

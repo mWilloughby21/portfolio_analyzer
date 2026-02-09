@@ -43,8 +43,3 @@ class Portfolio:
         return sum(
             p.shares * p.purchase_price for p in self.positions
         )
-        
-
-if __name__ == "__main__":
-    portfolio = Portfolio.from_csv(CSV_PATH)
-    print(f"Total Cost Basis: ${portfolio.total_cost_basis():.2f}")

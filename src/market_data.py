@@ -20,14 +20,3 @@ class MarketData:
         for pos in positions:
             prices[pos.ticker] = round(float(cls.get_curr_price(pos.ticker)), 2)
         return prices
-
-if __name__ == "__main__":
-    from portfolio import Position
-    from pathlib import Path
-    
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    CSV_PATH = BASE_DIR / 'data' / 'portfolio.csv'
-    
-    portfolio = Portfolio.from_csv(CSV_PATH)
-    prices = MarketData.get_prices(portfolio.positions)
-    print(prices)

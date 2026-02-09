@@ -32,18 +32,3 @@ class Analytics:
         return {
             p.ticker: round(cls.position_value(p, prices[p.ticker]) / total_value, 2) for p in positions
         }
-
-if __name__ == "__main__":
-    from portfolio import Portfolio
-    from market_data import MarketData
-    from pathlib import Path
-    
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    CSV_PATH = BASE_DIR / 'data' / 'portfolio.csv'
-    
-    portfolio = Portfolio.from_csv(CSV_PATH)
-    prices = MarketData.get_prices(portfolio.positions)
-    
-    print("Portfolio Value:", Analytics.portfolio_value(portfolio.positions, prices))
-    print("Gains/Losses:", Analytics.gains_losses(portfolio.positions, prices))
-    print("Allocation:", Analytics.allocation(portfolio.positions, prices))
