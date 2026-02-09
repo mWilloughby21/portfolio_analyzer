@@ -43,10 +43,8 @@ if __name__ == "__main__":
     portfolio = Portfolio.from_csv(CSV_PATH)
     prices = MarketData.get_prices(portfolio.positions)
     
-    # Calculate position values and allocation
     position_values = {p.ticker: Analytics.position_value(p, prices[p.ticker]) for p in portfolio.positions}
     allocation = Analytics.allocation(portfolio.positions, prices)
     
-    # Plot the results
     Visualization.plot_portfolio_value(position_values)
     Visualization.plot_allocation(allocation)

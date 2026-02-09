@@ -17,9 +17,11 @@ class Position:
     purchase_date: str
 
 class Portfolio:
+    # Initialize with a list of positions
     def __init__(self, positions: List[Position]):
         self.positions = positions
     
+    # Load portfolio from a CSV file
     @classmethod
     def from_csv(cls, file_path: str) -> 'Portfolio':
         df = pd.read_csv(file_path)
@@ -36,6 +38,7 @@ class Portfolio:
         
         return cls(positions)
     
+    # Calculate total cost basis of the portfolio
     def total_cost_basis(self) -> float:
         return sum(
             p.shares * p.purchase_price for p in self.positions
